@@ -1,9 +1,0 @@
-C:\Users\wunat\Downloads\ConnectingToMySQLSourceCode\DataLibrary\bin\Debug\netstandard2.0\DataLibrary.deps.json
-C:\Users\wunat\Downloads\ConnectingToMySQLSourceCode\DataLibrary\bin\Debug\netstandard2.0\DataLibrary.dll
-C:\Users\wunat\Downloads\ConnectingToMySQLSourceCode\DataLibrary\bin\Debug\netstandard2.0\DataLibrary.pdb
-C:\Users\wunat\Downloads\ConnectingToMySQLSourceCode\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.csprojAssemblyReference.cache
-C:\Users\wunat\Downloads\ConnectingToMySQLSourceCode\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.AssemblyInfoInputs.cache
-C:\Users\wunat\Downloads\ConnectingToMySQLSourceCode\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.AssemblyInfo.cs
-C:\Users\wunat\Downloads\ConnectingToMySQLSourceCode\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.csproj.CoreCompileInputs.cache
-C:\Users\wunat\Downloads\ConnectingToMySQLSourceCode\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.dll
-C:\Users\wunat\Downloads\ConnectingToMySQLSourceCode\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.pdb
