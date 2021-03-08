@@ -10,27 +10,27 @@ using Dapper;
 namespace BlazorServer.Controllers
 {
     [ApiController]
-    [Route("addresses")]
-    public class AddressController : ControllerBase
+    [Route("countries")]
+    public class CountryFormatController : ControllerBase
     {
         string connectionString = "Server=127.0.0.1;Port=3306;database=addresses;user id=root;password=nathaniel";
         // string connectionString = "Server=127.0.0.1;Port=3306;database=addresses;user id=root;password=Higgins5021";
         private readonly ILogger<AddressController> _logger;
 
-        public AddressController(ILogger<AddressController> logger)
+        public CountryFormatController(ILogger<AddressController> logger)
         {
             _logger = logger;
         }
 
-        // localhost/addresses/get
+        // localhost/countries/get
         [Route("get")]
         public async Task<IEnumerable<AddressModel>> GetAsync()
         {
             List<AddressModel> addresses;
 
-            string sql = "use addresses;" + 
-                "select * from addressdb";
-            
+            string sql = "use addresses;" +
+                "select * from countriesdb";
+
             using (IDbConnection connection = new MySqlConnection(connectionString))
             {
                 var rows = await connection.QueryAsync<AddressModel>(sql, new { });
@@ -41,12 +41,12 @@ namespace BlazorServer.Controllers
             return addresses.ToArray();
         }
 
-        // localhost/addresses/delete
+        // localhost/countries/delete
         [Route("delete")]
         public async Task DeleteData()
         {
             string sql = "use addresses;" +
-                    "delete from addressdb;";
+                    "delete from countriesdb;";
             using (IDbConnection connection = new MySqlConnection(connectionString))
             {
                 await connection.ExecuteAsync(sql, new { });
@@ -54,14 +54,13 @@ namespace BlazorServer.Controllers
         }
 
         // localhost/addresses/put/parameters
-        // parameters are all strings, e.g. put/street/city/state/province/zip/country
-        // " " can be used for null values
+        // parameters are boolean values except the country name, e.g. put/0/0/0/1/0/USA
         [Route("put/{StreetAddress}/{City}/{State}/{Province}/{PostalCode}/{Country}")]
-        public async Task InsertData(string StreetAddress, string City, string State, 
-            string Province, string PostalCode, string Country)
+        public async Task InsertData(int StreetAddress, int City, int State,
+            int Province, int PostalCode, string Country)
         {
             string sql = "use addresses;" +
-                    "insert into addressdb (StreetAddress, City, State, Province, PostalCode, Country) " +
+                    "insert into countriesdb (StreetAddress, City, State, Province, PostalCode, Country) " +
                     "values (@StreetAddress, @City, @State, @Province, @PostalCode, @Country);";
 
             using (IDbConnection connection = new MySqlConnection(connectionString))
@@ -79,28 +78,20 @@ namespace BlazorServer.Controllers
         }
 
         // localhost/addresses/search/parameters
-        // parameters are all strings, e.g. search/street/city/state/province/zip/country
-        // " " can be used for null values
-        [Route("search/{StreetAddress}/{City}/{State}/{Province}/{PostalCode}/{Country}")]
-        public async Task<IEnumerable<AddressModel>> SearchData(string StreetAddress, string City, string State,
-            string Province, string PostalCode, string Country)
+        // parameter is country name, e.g. search/USA 
+        [Route("search/{Country}")]
+        public async Task<IEnumerable<AddressModel>> SearchData(string Country)
         {
             List<AddressModel> addresses;
 
             string sql = "use addresses; " +
-                "select * from addressdb " +
-                "where StreetAddress=@StreetAddress and City=@City and State=@State " +
-                "and Province=@Province and PostalCode=@PostalCode and Country=@Country;";
+                "select * from countriesdb " +
+                "where Country=@Country;";
 
             using (IDbConnection connection = new MySqlConnection(connectionString))
             {
                 var rows = await connection.QueryAsync<AddressModel>(sql, new
                 {
-                    StreetAddress = StreetAddress,
-                    City = City,
-                    State = State,
-                    Province = Province,
-                    PostalCode = PostalCode,
                     Country = Country
                 });
                 addresses = rows.ToList();
