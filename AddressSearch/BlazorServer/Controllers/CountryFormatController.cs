@@ -13,8 +13,8 @@ namespace BlazorServer.Controllers
     [Route("countries")]
     public class CountryFormatController : ControllerBase
     {
-        //string connectionString = "Server=127.0.0.1;Port=3306;database=addresses;user id=root;password=nathaniel";
-        string connectionString = "Server=127.0.0.1;Port=3306;database=addresses;user id=root;password=Higgins5021";
+        string connectionString = "Server=127.0.0.1;Port=3306;database=addresses;user id=root;password=nathaniel";
+        // string connectionString = "Server=127.0.0.1;Port=3306;database=addresses;user id=root;password=Higgins5021";
         private readonly ILogger<AddressController> _logger;
 
         public CountryFormatController(ILogger<AddressController> logger)

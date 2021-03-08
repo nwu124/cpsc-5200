@@ -13,8 +13,8 @@ namespace BlazorServer.Controllers
     [Route("addresses")]
     public class AddressController : ControllerBase
     {
-        //string connectionString = "Server=127.0.0.1;Port=3306;database=addresses;user id=root;password=nathaniel";
-        string connectionString = "Server=127.0.0.1;Port=3306;database=addresses;user id=root;password=Higgins5021";
+        string connectionString = "Server=127.0.0.1;Port=3306;database=addresses;user id=root;password=nathaniel";
+        // string connectionString = "Server=127.0.0.1;Port=3306;database=addresses;user id=root;password=Higgins5021";
         private readonly ILogger<AddressController> _logger;
 
         public AddressController(ILogger<AddressController> logger)
@@ -102,47 +102,6 @@ namespace BlazorServer.Controllers
                     Province = Province,
                     PostalCode = PostalCode,
                     Country = Country
-                });
-                addresses = rows.ToList();
-            }
-            return addresses.ToArray();
-        }
-
-
-        [Route("search/{Country}")]
-        public async Task<IEnumerable<AddressModel>> SearchData(string Country)
-        {
-            List<AddressModel> addresses;
-
-            string sql = "use addresses; " +
-                "select * from addressdb " +
-                "where Country=@Country;";
-
-            using (IDbConnection connection = new MySqlConnection(connectionString))
-            {
-                var rows = await connection.QueryAsync<AddressModel>(sql, new
-                {
-                    Country = Country
-                });
-                addresses = rows.ToList();
-            }
-            return addresses.ToArray();
-        }
-
-        [Route("match/{City}")]
-        public async Task<IEnumerable<AddressModel>> SearchCity(string City)
-        {
-            List<AddressModel> addresses;
-
-            string sql = "use addresses; " +
-                "select * from addressdb " +
-                "where City=@City;";
-
-            using (IDbConnection connection = new MySqlConnection(connectionString))
-            {
-                var rows = await connection.QueryAsync<AddressModel>(sql, new
-                {
-                    City = City
                 });
                 addresses = rows.ToList();
             }
