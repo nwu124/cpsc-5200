@@ -1,6 +1,6 @@
 ﻿@page "/addressui"
 
-<h3>AddressUI</h3>
+<h3>Enter Address into Database</h3>
 <p>Street Address: <textarea id="_StreetAddress" name="_StreetAddress" rows="1" cols="50" maxlength="100" required></textarea></p>
 <p>City: <textarea id="City" name="City" rows="1" cols="50" maxlength="100" required></textarea></p>
 <p>State: <textarea id="State" name="State" rows="1" cols="50" maxlength="100" required></textarea></p>
@@ -11,10 +11,10 @@
 <a href="/addresses/put/@StreetAddress/@City/@State/@Province/@PostalCode/@Country" type="button" class="btn btn-primary" button style="margin:0px 10px 0px 190px">Put</a>
 
 @code {
-    string StreetAddress = "Street Address";
-    string City = "City";
-    string State = "State";
-    string Province = "Province";
-    string PostalCode = "Postal Code";
-    string Country = "Country";
+    string StreetAddress = "111 Dover St";
+    string City = "New York";
+    string State = "NY";
+    string Province = "none";
+    string PostalCode = "10004";
+    string Country = "USA";
 }

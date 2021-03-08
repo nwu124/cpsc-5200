@@ -75,15 +75,8 @@ using BlazorServer.Shared;
 #line default
 #line hidden
 #nullable disable
-#nullable restore
-#line 2 "C:\Users\ambro\source\repos\cpsc-5200\AddressSearch\BlazorServer\Pages\Index.razor"
-using FormValidation.Model;
-
-#line default
-#line hidden
-#nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/")]
-    public partial class Index : Microsoft.AspNetCore.Components.ComponentBase
+    [Microsoft.AspNetCore.Components.RouteAttribute("/match")]
+    public partial class Match : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
@@ -91,20 +84,14 @@ using FormValidation.Model;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 60 "C:\Users\ambro\source\repos\cpsc-5200\AddressSearch\BlazorServer\Pages\Index.razor"
+#line 14 "C:\Users\ambro\source\repos\cpsc-5200\AddressSearch\BlazorServer\Pages\Match.razor"
        
-    AddressFormModel user;
-
-    protected override void OnInitialized()
-    {
-        user = new AddressFormModel();
-    }
-
-    public void Submit()
-    {
-        // this method calls on valid form
-        // save form data by posting data to your api
-    }
+    string StreetAddress = "Street Address";
+    string City = "City";
+    string State = "State";
+    string Province = "Province";
+    string PostalCode = "Postal Code";
+    string Country = "Country";
 
 #line default
 #line hidden
