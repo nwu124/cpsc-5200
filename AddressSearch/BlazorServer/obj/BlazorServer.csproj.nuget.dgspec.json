@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\wunat\\Google Drive\\GitHub\\cpsc-5200\\AddressSearch\\BlazorServer\\BlazorServer.csproj": {}
+    "C:\\Users\\ambro\\Source\\Repos\\cpsc-5200\\AddressSearch\\BlazorServer\\BlazorServer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\wunat\\Google Drive\\GitHub\\cpsc-5200\\AddressSearch\\BlazorServer\\BlazorServer.csproj": {
+    "C:\\Users\\ambro\\Source\\Repos\\cpsc-5200\\AddressSearch\\BlazorServer\\BlazorServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\wunat\\Google Drive\\GitHub\\cpsc-5200\\AddressSearch\\BlazorServer\\BlazorServer.csproj",
+        "projectUniqueName": "C:\\Users\\ambro\\Source\\Repos\\cpsc-5200\\AddressSearch\\BlazorServer\\BlazorServer.csproj",
         "projectName": "BlazorServer",
-        "projectPath": "C:\\Users\\wunat\\Google Drive\\GitHub\\cpsc-5200\\AddressSearch\\BlazorServer\\BlazorServer.csproj",
-        "packagesPath": "C:\\Users\\wunat\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\wunat\\Google Drive\\GitHub\\cpsc-5200\\AddressSearch\\BlazorServer\\obj\\",
+        "projectPath": "C:\\Users\\ambro\\Source\\Repos\\cpsc-5200\\AddressSearch\\BlazorServer\\BlazorServer.csproj",
+        "packagesPath": "C:\\Users\\ambro\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ambro\\Source\\Repos\\cpsc-5200\\AddressSearch\\BlazorServer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\wunat\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ambro\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -67,7 +67,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     }

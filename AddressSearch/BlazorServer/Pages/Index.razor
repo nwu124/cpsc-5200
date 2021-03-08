@@ -1,5 +1,73 @@
 ﻿@page "/"
+@using FormValidation.Model
 
-<h1>Hello, world!</h1>
+<center>
+    <h1>Hello, world!</h1>
+    <h2>Welcome to Address Search</h2>
+</center>
 
-Welcome to AddressSearch
+
+<EditForm Model="@user" OnValidSubmit="@Submit">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+
+    <div class="form-group row">
+        <label for="txtFirstName" class="col-sm-2 col-form-label">Street</label>
+        <div class="col-sm-10">
+            <InputText id="txtFirstName" class="form-control" @bind-Value="@user.StreetAddress"></InputText>
+            <ValidationMessage For="@(() => user.StreetAddress)"></ValidationMessage>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="txtLastName" class="col-sm-2 col-form-label">City</label>
+        <div class="col-sm-10">
+            <InputText id="txtLastName" class="form-control" @bind-Value="@user.City"></InputText>
+            <ValidationMessage For="@(() => user.City)"></ValidationMessage>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="txtEmail" class="col-sm-2 col-form-label">State</label>
+        <div class="col-sm-10">
+            <InputText id="txtEmail" class="form-control" @bind-Value="@user.State"></InputText>
+            <ValidationMessage For="@(() => user.State)"></ValidationMessage>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="txtEmail" class="col-sm-2 col-form-label">Province</label>
+        <div class="col-sm-10">
+            <InputText id="txtEmail" class="form-control" @bind-Value="@user.Province"></InputText>
+            <ValidationMessage For="@(() => user.Province)"></ValidationMessage>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="txtPhone" class="col-sm-2 col-form-label">Postal Code</label>
+        <div class="col-sm-10">
+            <InputText id="txtPhone" class="form-control" @bind-Value="@user.PostalCode"></InputText>
+            <ValidationMessage For="@(() => user.PostalCode)"></ValidationMessage>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="txtPhone" class="col-sm-2 col-form-label">Country</label>
+        <div class="col-sm-10">
+            <InputText id="txtPhone" class="form-control" @bind-Value="@user.Country"></InputText>
+            <ValidationMessage For="@(() => user.Country)"></ValidationMessage>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Validate</button>
+    </div>
+</EditForm>
+
+@code {
+    AddressFormModel user;
+
+    protected override void OnInitialized()
+    {
+        user = new AddressFormModel();
+    }
+
+    public void Submit()
+    {
+        // this method calls on valid form
+        // save form data by posting data to your api
+    }
+}
