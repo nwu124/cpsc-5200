@@ -55,23 +55,26 @@ namespace BlazorServer.Controllers
 
         // localhost/addresses/put/parameters
         // parameters are boolean values except the country name, e.g. put/0/0/0/1/0/USA
-        [Route("put/{StreetAddress}/{City}/{State}/{Province}/{PostalCode}/{Country}")]
-        public async Task InsertData(int StreetAddress, int City, int State,
-            int Province, int PostalCode, string Country)
+        [Route("put/{StreetAddress}/{Neighborhood}/{City}/{County}/{State}/{Province}/{PostalCode}/{PostOffice}/{Country}")]
+        public async Task InsertData(int StreetAddress, int Neighborhood, int City, int County, int State,
+            int Province, int PostalCode, int PostOffice, string Country)
         {
             string sql = "use addresses;" +
-                    "insert into countriesdb (StreetAddress, City, State, Province, PostalCode, Country) " +
-                    "values (@StreetAddress, @City, @State, @Province, @PostalCode, @Country);";
+                    "insert into countriesdb (StreetAddress, Neighborhood, City, County, State, Province, PostalCode, PostOffice, Country) " +
+                    "values (@StreetAddress, @Neighborhood, @City, @County, @State, @Province, @PostalCode, @PostOffice, @Country);";
 
             using (IDbConnection connection = new MySqlConnection(connectionString))
             {
                 await connection.ExecuteAsync(sql, new
                 {
                     StreetAddress = StreetAddress,
+                    Neighborhood = Neighborhood,
                     City = City,
+                    County = County,
                     State = State,
                     Province = Province,
                     PostalCode = PostalCode,
+                    PostOffice = PostOffice,
                     Country = Country
                 });
             }

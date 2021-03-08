@@ -1,0 +1,19 @@
+﻿@page "/match"
+
+<h3>Find matching address</h3>
+<p>Street Address: <textarea id="_StreetAddress" name="_StreetAddress" rows="1" cols="50" maxlength="100" required></textarea></p>
+<p>Postal Code: <textarea id="PostalCode" name="PostalCode" rows="1" cols="50" maxlength="100" required></textarea></p>
+<p>City: <textarea id="City" name="City" rows="1" cols="50" maxlength="100" required></textarea></p>
+<p>Province: <textarea id="Province" name="Province" rows="1" cols="50" maxlength="100" required></textarea></p>
+<p>Country: <textarea id="Country" name="Country" rows="1" cols="50" maxlength="100" required></textarea></p>
+
+<a href="/addresses/match/@City" type="button" class="btn btn-primary" button style="margin:0px 10px 0px 190px">Match</a>
+
+<form class="example" action="/action_page.php" style="margin:auto;max-width:300px">
+    <input type="text" placeholder="Choose country..." name="search2">
+    <button type="submit" class="btn btn-secondary">Enter</button>
+</form>
+
+@code {
+    string City = "Rome";
+}

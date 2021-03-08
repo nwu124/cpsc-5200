@@ -76,14 +76,35 @@ using BlazorServer.Shared;
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\Users\wunat\Google Drive\GitHub\cpsc-5200\AddressSearch\BlazorServer\Pages\Index.razor"
+#line 2 "C:\Users\wunat\Google Drive\GitHub\cpsc-5200\AddressSearch\BlazorServer\Pages\Demo.razor"
 using BlazorServer.Models;
 
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/")]
-    public partial class Index : Microsoft.AspNetCore.Components.ComponentBase
+#nullable restore
+#line 3 "C:\Users\wunat\Google Drive\GitHub\cpsc-5200\AddressSearch\BlazorServer\Pages\Demo.razor"
+using System.Data;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "C:\Users\wunat\Google Drive\GitHub\cpsc-5200\AddressSearch\BlazorServer\Pages\Demo.razor"
+using MySql.Data.MySqlClient;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "C:\Users\wunat\Google Drive\GitHub\cpsc-5200\AddressSearch\BlazorServer\Pages\Demo.razor"
+using Dapper;
+
+#line default
+#line hidden
+#nullable disable
+    [Microsoft.AspNetCore.Components.RouteAttribute("/demo")]
+    public partial class Demo : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
@@ -91,10 +112,13 @@ using BlazorServer.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 66 "C:\Users\wunat\Google Drive\GitHub\cpsc-5200\AddressSearch\BlazorServer\Pages\Index.razor"
+#line 105 "C:\Users\wunat\Google Drive\GitHub\cpsc-5200\AddressSearch\BlazorServer\Pages\Demo.razor"
        
+    string connectionString = "Server=127.0.0.1;Port=3306;database=addresses;user id=root;password=nathaniel";
+    // string connectionString = "Server=127.0.0.1;Port=3306;database=addresses;user id=root;password=Higgins5021";
 
     AddressModel user;
+    List<AddressModel> searchResults;
 
     protected override void OnInitialized()
     {
@@ -105,6 +129,32 @@ using BlazorServer.Models;
     {
         // this method calls on valid form
         // save form data by posting data to your api
+    }
+
+    public async Task SearchData()
+    {
+        string sql = "use addresses; " +
+            "select * from addressdb " +
+            "where StreetAddress=@StreetAddress and Neighborhood=@Neighborhood and City=@City and County=@County and State=@State " +
+            "and Province=@Province and PostalCode=@PostalCode and PostOffice=@PostOffice and Country=@Country;";
+
+        using (IDbConnection connection = new MySqlConnection(connectionString))
+        {
+            var rows = await connection.QueryAsync<AddressModel>(sql, new
+            {
+                StreetAddress = user.StreetAddress,
+                Neighborhood = user.Neighborhood,
+                City = user.City,
+                County = user.County,
+                State = user.State,
+                Province = user.Province,
+                PostalCode = user.PostalCode,
+                PostOffice = user.PostOffice,
+                Country = user.Country
+            });
+            searchResults = rows.ToList();
+        }
+        await OnInitializedAsync();
     }
 
 #line default

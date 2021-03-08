@@ -9,10 +9,13 @@ namespace BlazorServer.Models
     {
         public int Id { get; set; }
         public int StreetAddress { get; set; }
+        public int Neighborhood { get; set; }
         public int City { get; set; }
+        public int County { get; set; }
         public int State { get; set; }
         public int Province { get; set; }
         public int PostalCode { get; set; }
+        public int PostOffice { get; set; }
         public string Country { get; set; }
     }
 }

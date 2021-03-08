@@ -83,7 +83,7 @@ using BlazorServer.Shared;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 33 "C:\Users\wunat\Google Drive\GitHub\cpsc-5200\AddressSearch\BlazorServer\Shared\NavMenu.razor"
+#line 48 "C:\Users\wunat\Google Drive\GitHub\cpsc-5200\AddressSearch\BlazorServer\Shared\NavMenu.razor"
        
     private bool collapseNavMenu = true;
 

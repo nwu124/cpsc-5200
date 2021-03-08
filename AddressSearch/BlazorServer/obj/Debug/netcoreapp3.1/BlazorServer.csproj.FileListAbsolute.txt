@@ -122,3 +122,9 @@ C:\Users\wunat\Google Drive\GitHub\cpsc-5200\AddressSearch\BlazorServer\obj\Debu
 C:\Users\wunat\Google Drive\GitHub\cpsc-5200\AddressSearch\BlazorServer\obj\Debug\netcoreapp3.1\BlazorServer.dll
 C:\Users\wunat\Google Drive\GitHub\cpsc-5200\AddressSearch\BlazorServer\obj\Debug\netcoreapp3.1\BlazorServer.pdb
 C:\Users\wunat\Google Drive\GitHub\cpsc-5200\AddressSearch\BlazorServer\obj\Debug\netcoreapp3.1\BlazorServer.genruntimeconfig.cache
+C:\Users\wunat\Google Drive\GitHub\cpsc-5200\AddressSearch\BlazorServer\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Country.razor.g.cs
+C:\Users\wunat\Google Drive\GitHub\cpsc-5200\AddressSearch\BlazorServer\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Match.razor.g.cs
+C:\Users\wunat\Google Drive\GitHub\cpsc-5200\AddressSearch\BlazorServer\obj\Debug\netcoreapp3.1\Razor\Pages\Country.razor.g.cs
+C:\Users\wunat\Google Drive\GitHub\cpsc-5200\AddressSearch\BlazorServer\obj\Debug\netcoreapp3.1\Razor\Pages\Match.razor.g.cs
+C:\Users\wunat\Google Drive\GitHub\cpsc-5200\AddressSearch\BlazorServer\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Demo.razor.g.cs
+C:\Users\wunat\Google Drive\GitHub\cpsc-5200\AddressSearch\BlazorServer\obj\Debug\netcoreapp3.1\Razor\Pages\Demo.razor.g.cs

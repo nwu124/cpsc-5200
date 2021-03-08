@@ -75,15 +75,8 @@ using BlazorServer.Shared;
 #line default
 #line hidden
 #nullable disable
-#nullable restore
-#line 2 "C:\Users\wunat\Google Drive\GitHub\cpsc-5200\AddressSearch\BlazorServer\Pages\Index.razor"
-using BlazorServer.Models;
-
-#line default
-#line hidden
-#nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/")]
-    public partial class Index : Microsoft.AspNetCore.Components.ComponentBase
+    [Microsoft.AspNetCore.Components.RouteAttribute("/country")]
+    public partial class Country : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
@@ -91,21 +84,9 @@ using BlazorServer.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 66 "C:\Users\wunat\Google Drive\GitHub\cpsc-5200\AddressSearch\BlazorServer\Pages\Index.razor"
+#line 9 "C:\Users\wunat\Google Drive\GitHub\cpsc-5200\AddressSearch\BlazorServer\Pages\Country.razor"
        
-
-    AddressModel user;
-
-    protected override void OnInitialized()
-    {
-        user = new AddressModel();
-    }
-
-    public void Submit()
-    {
-        // this method calls on valid form
-        // save form data by posting data to your api
-    }
+    string country = "Brazil";
 
 #line default
 #line hidden

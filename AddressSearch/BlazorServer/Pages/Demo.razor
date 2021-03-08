@@ -1,0 +1,148 @@
+@page "/demo"
+@using BlazorServer.Models
+@using System.Data;
+@using MySql.Data.MySqlClient;
+@using Dapper;
+
+<center>
+    <h1>Address Search</h1>
+    <h2></h2>
+</center>
+
+
+<EditForm Model="@user" OnValidSubmit="@Submit">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+
+    <div class="form-group row">
+        <label for="txtFirstName" class="col-sm-2 col-form-label">Street</label>
+        <div class="col-sm-10">
+            <InputText id="_StreetAddress" class="form-control" @bind-Value="@user.StreetAddress"></InputText>
+            <ValidationMessage For="@(() => user.StreetAddress)"></ValidationMessage>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="_Neighborhood" class="col-sm-2 col-form-label">Neighborhood</label>
+        <div class="col-sm-10">
+            <InputText id="txtLastName" class="form-control" @bind-Value="@user.Neighborhood"></InputText>
+            <ValidationMessage For="@(() => user.Neighborhood)"></ValidationMessage>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="_City" class="col-sm-2 col-form-label">City</label>
+        <div class="col-sm-10">
+            <InputText id="txtLastName" class="form-control" @bind-Value="@user.City"></InputText>
+            <ValidationMessage For="@(() => user.City)"></ValidationMessage>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="_County" class="col-sm-2 col-form-label">County</label>
+        <div class="col-sm-10">
+            <InputText id="txtLastName" class="form-control" @bind-Value="@user.County"></InputText>
+            <ValidationMessage For="@(() => user.County)"></ValidationMessage>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="_State" class="col-sm-2 col-form-label">State</label>
+        <div class="col-sm-10">
+            <InputText id="txtEmail" class="form-control" @bind-Value="@user.State"></InputText>
+            <ValidationMessage For="@(() => user.State)"></ValidationMessage>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="_Problems" class="col-sm-2 col-form-label">Province</label>
+        <div class="col-sm-10">
+            <InputText id="txtEmail" class="form-control" @bind-Value="@user.Province"></InputText>
+            <ValidationMessage For="@(() => user.Province)"></ValidationMessage>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="_PostalCode" class="col-sm-2 col-form-label">Postal Code</label>
+        <div class="col-sm-10">
+            <InputText id="txtPhone" class="form-control" @bind-Value="@user.PostalCode"></InputText>
+            <ValidationMessage For="@(() => user.PostalCode)"></ValidationMessage>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="_PostOffice" class="col-sm-2 col-form-label">Post Office</label>
+        <div class="col-sm-10">
+            <InputText id="txtLastName" class="form-control" @bind-Value="@user.PostOffice"></InputText>
+            <ValidationMessage For="@(() => user.PostOffice)"></ValidationMessage>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="_Country" class="col-sm-2 col-form-label">Country</label>
+        <div class="col-sm-10">
+            <InputText id="txtPhone" class="form-control" @bind-Value="@user.Country"></InputText>
+            <ValidationMessage For="@(() => user.Country)"></ValidationMessage>
+        </div>
+    </div>
+</EditForm>
+
+
+<form class="example" action="/action_page.php" style="margin:auto;max-width:300px">
+    <input type="text" placeholder="Choose country..." name="search2">
+    <button type="submit" class="btn btn-secondary">Enter</button>
+</form>
+
+<button class="btn btn-danger" @onclick="SearchData">Search All Countries</button>
+
+
+<h2>Search Results:</h2>
+@if (searchResults == null || searchResults.Count == 0)
+{
+    <p><em>None</em></p>
+}
+else
+{
+    @foreach (var i in searchResults)
+    {
+        <p>
+            ID: @i.Id, @i.StreetAddress, @i.Neighborhood, @i.City, @i.County, @i.State, @i.Province, @i.PostalCode, @i.PostOffice, @i.Country
+        </p>
+    }
+}
+
+@code {
+    string connectionString = "Server=127.0.0.1;Port=3306;database=addresses;user id=root;password=nathaniel";
+    // string connectionString = "Server=127.0.0.1;Port=3306;database=addresses;user id=root;password=Higgins5021";
+
+    AddressModel user;
+    List<AddressModel> searchResults;
+
+    protected override void OnInitialized()
+    {
+        user = new AddressModel();
+    }
+
+    public void Submit()
+    {
+        // this method calls on valid form
+        // save form data by posting data to your api
+    }
+
+    public async Task SearchData()
+    {
+        string sql = "use addresses; " +
+            "select * from addressdb " +
+            "where StreetAddress=@StreetAddress and Neighborhood=@Neighborhood and City=@City and County=@County and State=@State " +
+            "and Province=@Province and PostalCode=@PostalCode and PostOffice=@PostOffice and Country=@Country;";
+
+        using (IDbConnection connection = new MySqlConnection(connectionString))
+        {
+            var rows = await connection.QueryAsync<AddressModel>(sql, new
+            {
+                StreetAddress = user.StreetAddress,
+                Neighborhood = user.Neighborhood,
+                City = user.City,
+                County = user.County,
+                State = user.State,
+                Province = user.Province,
+                PostalCode = user.PostalCode,
+                PostOffice = user.PostOffice,
+                Country = user.Country
+            });
+            searchResults = rows.ToList();
+        }
+        await OnInitializedAsync();
+    }
+}
