@@ -18,9 +18,8 @@ namespace FormValidation.Model
         public string County { get; set; }
         [Required]
         public string State { get; set; }
-
+        [Required]
         public string Province { get; set; }
-
         [Required]
         public string PostalCode { get; set; }
         [Required]

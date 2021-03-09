@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using System.Data;
 using MySql.Data.MySqlClient;
 using Dapper;
+using BlazorServer.Models;
 
 namespace BlazorServer.Controllers
 {
@@ -24,16 +25,16 @@ namespace BlazorServer.Controllers
 
         // localhost/countries/get
         [Route("get")]
-        public async Task<IEnumerable<AddressModel>> GetAsync()
+        public async Task<IEnumerable<CountryFormatModel>> GetAsync()
         {
-            List<AddressModel> addresses;
+            List<CountryFormatModel> addresses;
 
             string sql = "use addresses;" +
                 "select * from countriesdb";
 
             using (IDbConnection connection = new MySqlConnection(connectionString))
             {
-                var rows = await connection.QueryAsync<AddressModel>(sql, new { });
+                var rows = await connection.QueryAsync<CountryFormatModel>(sql, new { });
 
                 addresses = rows.ToList();
             }
@@ -83,9 +84,9 @@ namespace BlazorServer.Controllers
         // localhost/addresses/search/parameters
         // parameter is country name, e.g. search/USA 
         [Route("search/{Country}")]
-        public async Task<IEnumerable<AddressModel>> SearchData(string Country)
+        public async Task<IEnumerable<CountryFormatModel>> SearchData(string Country)
         {
-            List<AddressModel> addresses;
+            List<CountryFormatModel> addresses;
 
             string sql = "use addresses; " +
                 "select * from countriesdb " +
@@ -93,7 +94,7 @@ namespace BlazorServer.Controllers
 
             using (IDbConnection connection = new MySqlConnection(connectionString))
             {
-                var rows = await connection.QueryAsync<AddressModel>(sql, new
+                var rows = await connection.QueryAsync<CountryFormatModel>(sql, new
                 {
                     Country = Country
                 });
