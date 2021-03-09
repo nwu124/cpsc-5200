@@ -81,11 +81,11 @@ namespace BlazorServer.Controllers
             }
         }
 
-        // localhost/addresses/search/parameters
-        // parameters are all strings, e.g. search/street/city/state/province/zip/country
+        // localhost/addresses/exactsearch/parameters
+        // parameters are all strings, e.g. search/street/neighborhood/city/county/state/province/zip/PO/country
         // " " can be used for null values
-        [Route("search/{StreetAddress}/{Neighborhood}/{City}/{County}/{State}/{Province}/{PostalCode}/{PostOffice}/{Country}")]
-        public async Task<IEnumerable<AddressModel>> SearchData(string StreetAddress, string Neighborhood, string City, string County, string State,
+        [Route("exactsearch/{StreetAddress}/{Neighborhood}/{City}/{County}/{State}/{Province}/{PostalCode}/{PostOffice}/{Country}")]
+        public async Task<IEnumerable<AddressModel>> ExactSearchData(string StreetAddress, string Neighborhood, string City, string County, string State,
             string Province, string PostalCode, string PostOffice, string Country)
         {
             List<AddressModel> addresses;
@@ -94,6 +94,72 @@ namespace BlazorServer.Controllers
                 "select * from addressdb " +
                 "where StreetAddress=@StreetAddress and Neighborhood=@Neighborhood and City=@City and County=@County and State=@State " +
                 "and Province=@Province and PostalCode=@PostalCode and PostOffice=@PostOffice and Country=@Country;";
+
+            using (IDbConnection connection = new MySqlConnection(connectionString))
+            {
+                var rows = await connection.QueryAsync<AddressModel>(sql, new
+                {
+                    StreetAddress = StreetAddress,
+                    Neighborhood = Neighborhood,
+                    City = City,
+                    County = County,
+                    State = State,
+                    Province = Province,
+                    PostalCode = PostalCode,
+                    PostOffice = PostOffice,
+                    Country = Country
+                });
+                addresses = rows.ToList();
+            }
+            return addresses.ToArray();
+        }
+
+        // localhost/addresses/partialsearch/parameters
+        // parameters are all strings, e.g. search/street/neighborhood/city/county/state/province/zip/PO/country
+        // " " can be used for null values
+        [Route("partialsearchinternational/{StreetAddress}/{Neighborhood}/{City}/{County}/{State}/{Province}/{PostalCode}/{PostOffice}/{Country}")]
+        public async Task<IEnumerable<AddressModel>> PartialSearchDataInternational(string StreetAddress, string Neighborhood, string City, string County, string State,
+            string Province, string PostalCode, string PostOffice, string Country)
+        {
+            List<AddressModel> addresses;
+
+            string sql = "use addresses; " +
+                "select * from addressdb " +
+                "where StreetAddress=@StreetAddress or Neighborhood=@Neighborhood or City=@City or County=@County or State=@State " +
+                "or Province=@Province or PostalCode=@PostalCode or PostOffice=@PostOffice or Country=@Country;";
+
+            using (IDbConnection connection = new MySqlConnection(connectionString))
+            {
+                var rows = await connection.QueryAsync<AddressModel>(sql, new
+                {
+                    StreetAddress = StreetAddress,
+                    Neighborhood = Neighborhood,
+                    City = City,
+                    County = County,
+                    State = State,
+                    Province = Province,
+                    PostalCode = PostalCode,
+                    PostOffice = PostOffice,
+                    Country = Country
+                });
+                addresses = rows.ToList();
+            }
+            return addresses.ToArray();
+        }
+
+        // localhost/addresses/partialsearch/parameters
+        // parameters are all strings, e.g. search/street/neighborhood/city/county/state/province/zip/PO/country
+        // " " can be used for null values
+        [Route("partialsearchlocal/{StreetAddress}/{Neighborhood}/{City}/{County}/{State}/{Province}/{PostalCode}/{PostOffice}/{Country}")]
+        public async Task<IEnumerable<AddressModel>> PartialSearchDataLocal(string StreetAddress, string Neighborhood, string City, string County, string State,
+            string Province, string PostalCode, string PostOffice, string Country)
+        {
+            List<AddressModel> addresses;
+
+            string sql = "use addresses; " +
+                "select * from addressdb " +
+                "where (StreetAddress=@StreetAddress or Neighborhood=@Neighborhood or City=@City or County=@County or State=@State " +
+                "or Province=@Province or PostalCode=@PostalCode or PostOffice=@PostOffice) and Country=@Country;";
 
             using (IDbConnection connection = new MySqlConnection(connectionString))
             {
