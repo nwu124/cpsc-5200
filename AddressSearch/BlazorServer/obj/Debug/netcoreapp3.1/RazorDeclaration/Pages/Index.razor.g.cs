@@ -82,6 +82,27 @@ using BlazorServer.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "C:\Users\wunat\Google Drive\GitHub\cpsc-5200\AddressSearch\BlazorServer\Pages\Index.razor"
+using System.Data;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "C:\Users\wunat\Google Drive\GitHub\cpsc-5200\AddressSearch\BlazorServer\Pages\Index.razor"
+using MySql.Data.MySqlClient;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "C:\Users\wunat\Google Drive\GitHub\cpsc-5200\AddressSearch\BlazorServer\Pages\Index.razor"
+using Dapper;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/")]
     public partial class Index : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -91,20 +112,124 @@ using BlazorServer.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 66 "C:\Users\wunat\Google Drive\GitHub\cpsc-5200\AddressSearch\BlazorServer\Pages\Index.razor"
+#line 143 "C:\Users\wunat\Google Drive\GitHub\cpsc-5200\AddressSearch\BlazorServer\Pages\Index.razor"
        
+    string connectionString = "Server=127.0.0.1;Port=3306;database=addresses;user id=root;password=nathaniel";
+    // string connectionString = "Server=127.0.0.1;Port=3306;database=addresses;user id=root;password=Higgins5021";
 
     AddressModel user;
+    AddressModel countrySearch;
+    List<AddressModel> searchResults;
+    List<CountryFormatModel> country;
 
     protected override void OnInitialized()
     {
         user = new AddressModel();
+        countrySearch = new AddressModel();
     }
 
     public void Submit()
     {
         // this method calls on valid form
         // save form data by posting data to your api
+    }
+
+    public async Task SearchExactData()
+    {
+        string sql = "use addresses; " +
+            "select * from addressdb " +
+            "where StreetAddress=@StreetAddress and Neighborhood=@Neighborhood and City=@City and County=@County and State=@State " +
+            "and Province=@Province and PostalCode=@PostalCode and PostOffice=@PostOffice and Country=@Country;";
+
+        using (IDbConnection connection = new MySqlConnection(connectionString))
+        {
+            var rows = await connection.QueryAsync<AddressModel>(sql, new
+            {
+                StreetAddress = user.StreetAddress,
+                Neighborhood = user.Neighborhood,
+                City = user.City,
+                County = user.County,
+                State = user.State,
+                Province = user.Province,
+                PostalCode = user.PostalCode,
+                PostOffice = user.PostOffice,
+                Country = user.Country
+            });
+            searchResults = rows.ToList();
+        }
+        await OnInitializedAsync();
+    }
+
+    public async Task SearchPartialDataLocal()
+    {
+        string sql = "use addresses; " +
+            "select * from addressdb " +
+            "where (StreetAddress=@StreetAddress or Neighborhood=@Neighborhood or City=@City or County=@County or State=@State " +
+            "or Province=@Province or PostalCode=@PostalCode or PostOffice=@PostOffice) and Country=@Country;";
+
+
+        using (IDbConnection connection = new MySqlConnection(connectionString))
+        {
+            var rows = await connection.QueryAsync<AddressModel>(sql, new
+            {
+                StreetAddress = user.StreetAddress,
+                Neighborhood = user.Neighborhood,
+                City = user.City,
+                County = user.County,
+                State = user.State,
+                Province = user.Province,
+                PostalCode = user.PostalCode,
+                PostOffice = user.PostOffice,
+                Country = user.Country
+            });
+            searchResults = rows.ToList();
+        }
+
+        await OnInitializedAsync();
+    }
+    public async Task SearchPartialDataInternational()
+    {
+        string sql = "use addresses; " +
+            "select * from addressdb " +
+            "where StreetAddress=@StreetAddress or Neighborhood=@Neighborhood or City=@City or County=@County or State=@State " +
+            "or Province=@Province or PostalCode=@PostalCode or PostOffice=@PostOffice or Country=@Country;";
+
+
+        using (IDbConnection connection = new MySqlConnection(connectionString))
+        {
+            var rows = await connection.QueryAsync<AddressModel>(sql, new
+            {
+                StreetAddress = user.StreetAddress,
+                Neighborhood = user.Neighborhood,
+                City = user.City,
+                County = user.County,
+                State = user.State,
+                Province = user.Province,
+                PostalCode = user.PostalCode,
+                PostOffice = user.PostOffice,
+                Country = user.Country
+            });
+            searchResults = rows.ToList();
+        }
+
+        await OnInitializedAsync();
+    }
+
+    public async Task SearchCountry()
+    {
+        string sql = "use addresses; " +
+            "select * from countriesdb " +
+            "where Country=@Country;";
+
+        using (IDbConnection connection = new MySqlConnection(connectionString))
+        {
+            var rows = await connection.QueryAsync<CountryFormatModel>(sql, new
+            {
+                Country = countrySearch.Country
+            });
+            country = rows.ToList();
+        }
+
     }
 
 #line default
